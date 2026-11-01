@@ -574,8 +574,6 @@ function ContactForm() {
   )
 }
 
-// Deterministic "barcode" built from the letters of the name
-const barcode = [...profile.name.replace(/\s/g, '').repeat(3)].map((c) => (c.charCodeAt(0) % 3) + 1)
 
 function Ticket() {
   const ref = useRef(null)
@@ -620,12 +618,6 @@ function Ticket() {
           <div><dt>Status</dt><dd className="ok">● Available</dd></div>
         </dl>
         <div className="tags">{profile.stack.map((s) => <span key={s}>{s}</span>)}</div>
-        <div className="ticket-stub">
-          <div className="barcode" aria-hidden="true">
-            {barcode.map((w, i) => <i key={i} style={{ width: w }} />)}
-          </div>
-          <span>Admit one · {new Date().getFullYear()}</span>
-        </div>
       </div>
       <SpinBadge />
     </div>
