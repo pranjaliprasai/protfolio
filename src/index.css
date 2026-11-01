@@ -197,11 +197,12 @@ main {
   aspect-ratio: 4 / 5; background: #e9e7e3;
 }
 .ticket-photo img {
-  /* full colour, framed to show face, neck and coat */
-  display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%;
-  transition: transform 0.6s;
+  /* black & white by default, full colour on hover — framed down to the coat */
+  display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%;
+  filter: grayscale(1) contrast(1.05); transition: filter 0.6s, transform 0.6s;
 }
-.ticket:hover .ticket-photo img { transform: scale(1.03); }
+.ticket:hover .ticket-photo img { filter: none; transform: scale(1.03); }
+@media (hover: none) { .ticket-photo img { filter: none; } } /* phones: always colour */
 .ticket-photo figcaption {
   position: absolute; left: 0.7rem; bottom: 0.7rem; z-index: 1;
   font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em;
@@ -630,7 +631,7 @@ main {
   .hero-visual { width: min(100%, 350px); }
   .ticket { padding: 1.2rem; }
   .ticket-photo { aspect-ratio: 1 / 1; margin-top: 1rem; }
-  .ticket-photo img { object-position: 50% 70%; }
+  .ticket-photo img { object-position: 50% 85%; }
   .ticket-id { margin: 1rem 0; }
   .ticket-stub { margin: 1.1rem -1.2rem -1.2rem; padding: 0.9rem 1.2rem; }
   .badge { margin-bottom: 1.2rem; }
