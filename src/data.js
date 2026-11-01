@@ -8,7 +8,6 @@ export const profile = {
   location: 'Gaushala, Kathmandu, Nepal',
   timezone: 'UTC+5:45',
   email: 'pranjaliprasai1234@gmail.com',
-  phone: '+977 9763234521',
   linkedin: 'https://www.linkedin.com/in/pranjali-p-0724a7346/',
   github: 'https://github.com/pranjaliprasai',
   resume: 'resume.pdf', // your CV in the public folder — replace public/resume.pdf to update it

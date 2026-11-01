@@ -446,42 +446,85 @@ function Works() {
 // Sends the message straight to your inbox through Web3Forms (free, no server needed).
 // Your access key lives in data.js → profile.web3formsKey
 const formReady = Boolean(profile.web3formsKey)
+const FORM_URL = 'https://api.web3forms.com/submit'
+
+const messageFields = (f) => ({
+  access_key: profile.web3formsKey,
+  subject: `Portfolio message from ${f.get('name')}`,
+  from_name: 'Portfolio contact form',
+  name: f.get('name'),
+  email: f.get('email'),
+  message: f.get('message'),
+})
+
+// Plan B: a normal browser form post (like old-school websites). It isn't affected by the
+// cross-site checks that some browsers, networks or extensions block, and Web3Forms sends
+// the visitor straight back here afterwards with ?sent=1.
+function postAsNormalForm(fields) {
+  const form = document.createElement('form')
+  form.method = 'POST'
+  form.action = FORM_URL
+  form.style.display = 'none'
+  const back = new URL(window.location.href)
+  back.search = '?sent=1'
+  back.hash = 'contact'
+  Object.entries({ ...fields, redirect: back.href }).forEach(([name, value]) => {
+    const input = document.createElement('input')
+    input.type = 'hidden'
+    input.name = name
+    input.value = value
+    form.appendChild(input)
+  })
+  document.body.appendChild(form)
+  form.submit()
+}
+
+// Did we just come back from a Plan B send?
+const cameBackSent = () => {
+  try { return new URLSearchParams(window.location.search).get('sent') === '1' } catch { return false }
+}
 
 function ContactForm() {
-  const [state, setState] = useState('idle') // idle | sending | sent | error
+  const [state, setState] = useState(() => (cameBackSent() ? 'sent' : 'idle')) // idle | sending | sent | error
   const [errorMsg, setErrorMsg] = useState('')
+
+  useEffect(() => {
+    if (!cameBackSent()) return
+    // tidy the address bar and show the thank-you message
+    window.history.replaceState(null, '', window.location.pathname + '#contact')
+    setTimeout(() => document.getElementById('contact')?.scrollIntoView(), 300)
+  }, [])
 
   const onSubmit = async (e) => {
     e.preventDefault()
     const form = e.currentTarget
     const f = new FormData(form)
     if (f.get('botcheck')) return // a bot filled the hidden field
+    if (!formReady) {
+      setErrorMsg('This form is still being set up.')
+      setState('error')
+      return
+    }
     setState('sending')
+    const fields = messageFields(f)
+
+    // Plan A: send in the background. FormData (not JSON) keeps it a "simple" request,
+    // so the browser doesn't need an extra permission check first.
+    const body = new FormData()
+    Object.entries(fields).forEach(([k, v]) => body.append(k, v))
     try {
-      if (!formReady) throw new Error('setup')
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: profile.web3formsKey,
-          subject: `Portfolio message from ${f.get('name')}`,
-          from_name: 'Portfolio contact form',
-          name: f.get('name'),
-          email: f.get('email'),
-          message: f.get('message'),
-        }),
-      })
+      const res = await fetch(FORM_URL, { method: 'POST', body, headers: { Accept: 'application/json' } })
       const data = await res.json().catch(() => ({}))
       if (!res.ok || String(data.success) === 'false') throw new Error(data.message || `Error ${res.status}`)
       form.reset()
       setState('sent')
     } catch (err) {
-      console.error('Contact form error:', err)
-      setErrorMsg(
-        err.message === 'setup' ? 'This form is still being set up.'
-          : err instanceof TypeError ? "Couldn't reach the mail service (check your internet or ad blocker)."
-            : `Couldn't send: ${err.message}.`,
-      )
+      console.warn('Background send failed, switching to normal form post:', err)
+      if (err instanceof TypeError) {
+        postAsNormalForm(fields) // Plan B — the page goes to Web3Forms and comes back
+        return
+      }
+      setErrorMsg(`Couldn't send: ${err.message}.`)
       setState('error')
     }
   }
@@ -929,7 +972,6 @@ export default function App() {
                 <span>{profile.email}</span><span className="email-arrow">↗</span>
               </a>
               <dl className="contact-details">
-                <div><dt>Phone</dt><dd><a href={`tel:${profile.phone.replace(/\s/g, '')}`}>{profile.phone}</a></dd></div>
                 <div><dt>Location</dt><dd>{profile.location}</dd></div>
                 <div><dt>Timezone</dt><dd>{profile.timezone}</dd></div>
               </dl>
