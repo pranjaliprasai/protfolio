@@ -11,9 +11,9 @@ export const profile = {
   phone: '+977 9763234521',
   linkedin: 'https://www.linkedin.com/in/pranjali-p-0724a7346/',
   github: 'https://github.com/pranjaliprasai',
-  resume: '/resume.pdf', // your CV in the public folder — replace public/resume.pdf to update it
+  resume: 'resume.pdf', // your CV in the public folder — replace public/resume.pdf to update it
   web3formsKey: '92fc535a-ae75-4e1f-a887-32876f3fe1cc', // paste your Web3Forms access key here — the contact form sends to your inbox once it's set
-  photo: '/image.png', // your photo in the public folder — set to '' to show initials instead
+  photo: 'image.png', // your photo in the public folder — set to '' to show initials instead
   stack: ['React.js', 'JavaScript', 'Tailwind CSS', 'Node.js', 'MongoDB'],
 }
 
@@ -51,7 +51,7 @@ export const experience = [
 
 // status: 'completed' or 'ongoing'
 // hackathon: event name — adds a hackathon badge and puts it under the Hackathon tab ('' = not a hackathon)
-// image: screenshot in the public folder, e.g. '/smartshelf.png' ('' = a generated cover is shown)
+// image: screenshot in the public folder, e.g. 'smartshelf.png' ('' = a generated cover is shown)
 // link: live site — shows a "Visit project" button in the popup. Every project also links to your GitHub profile.
 export const projects = [
   {
@@ -171,13 +171,13 @@ export const education = [
 
 // file: certificate image in public/certificates (view-only, no download) — preview thumbs live in public/certificates/thumbs
 export const certifications = [
-  { title: 'AWS Academy Cloud Foundations', issuer: 'Amazon Web Services', date: 'Nov 2024', detail: '20 hours', file: '/certificates/aws-cloud-foundations.webp' },
-  { title: 'AWS Academy Data Engineering', issuer: 'Amazon Web Services', date: 'Nov 2024', detail: '40 hours', file: '/certificates/aws-data-engineering.webp' },
-  { title: 'AWS Academy Machine Learning Foundations', issuer: 'Amazon Web Services', date: 'Nov 2024', detail: '20 hours', file: '/certificates/aws-ml-foundations.webp' },
-  { title: 'AWS Academy Machine Learning for Natural Language Processing', issuer: 'Amazon Web Services', date: 'Dec 2024', detail: '20 hours', file: '/certificates/aws-ml-nlp.webp' },
-  { title: 'Hack for Business — 48-hour Hackathon', issuer: 'Kathmandu University (KUSOM)', date: 'Jun 2025', detail: 'Participation', file: '/certificates/ku-hack-for-business.webp' },
-  { title: 'Learning REST APIs', issuer: 'LinkedIn Learning', date: 'May 2026', detail: '1h 51m', file: '/certificates/linkedin-learning-rest-apis.webp' },
-  { title: 'React: Ecosystems', issuer: 'LinkedIn Learning', date: 'May 2026', detail: '12 min', file: '/certificates/linkedin-react-ecosystems.webp' },
-  { title: 'Communication Within Teams', issuer: 'LinkedIn Learning', date: 'May 2026', detail: '41 min', file: '/certificates/linkedin-communication-within-teams.webp' },
-  { title: 'UX Design: 1 Overview', issuer: 'LinkedIn Learning', date: 'May 2026', detail: '13 min', file: '/certificates/linkedin-ux-design-overview.webp' },
+  { title: 'AWS Academy Cloud Foundations', issuer: 'Amazon Web Services', date: 'Nov 2024', detail: '20 hours', file: 'certificates/aws-cloud-foundations.webp' },
+  { title: 'AWS Academy Data Engineering', issuer: 'Amazon Web Services', date: 'Nov 2024', detail: '40 hours', file: 'certificates/aws-data-engineering.webp' },
+  { title: 'AWS Academy Machine Learning Foundations', issuer: 'Amazon Web Services', date: 'Nov 2024', detail: '20 hours', file: 'certificates/aws-ml-foundations.webp' },
+  { title: 'AWS Academy Machine Learning for Natural Language Processing', issuer: 'Amazon Web Services', date: 'Dec 2024', detail: '20 hours', file: 'certificates/aws-ml-nlp.webp' },
+  { title: 'Hack for Business — 48-hour Hackathon', issuer: 'Kathmandu University (KUSOM)', date: 'Jun 2025', detail: 'Participation', file: 'certificates/ku-hack-for-business.webp' },
+  { title: 'Learning REST APIs', issuer: 'LinkedIn Learning', date: 'May 2026', detail: '1h 51m', file: 'certificates/linkedin-learning-rest-apis.webp' },
+  { title: 'React: Ecosystems', issuer: 'LinkedIn Learning', date: 'May 2026', detail: '12 min', file: 'certificates/linkedin-react-ecosystems.webp' },
+  { title: 'Communication Within Teams', issuer: 'LinkedIn Learning', date: 'May 2026', detail: '41 min', file: 'certificates/linkedin-communication-within-teams.webp' },
+  { title: 'UX Design: 1 Overview', issuer: 'LinkedIn Learning', date: 'May 2026', detail: '13 min', file: 'certificates/linkedin-ux-design-overview.webp' },
 ]
