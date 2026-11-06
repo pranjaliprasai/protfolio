@@ -602,7 +602,7 @@ function Ticket() {
         </div>
         {profile.photo && (
           <figure className="ticket-photo">
-            <img src={profile.photo} alt={`Portrait of ${profile.name}`} width="799" height="1024" fetchPriority="high" />
+            <img src={profile.photo} alt={`Portrait of ${profile.name}`} width="1043" height="1430" fetchPriority="high" />
           </figure>
         )}
         <div className="ticket-id">

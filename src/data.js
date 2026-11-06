@@ -12,7 +12,7 @@ export const profile = {
   github: 'https://github.com/pranjaliprasai',
   resume: 'resume.pdf', // your CV in the public folder — replace public/resume.pdf to update it
   web3formsKey: '92fc535a-ae75-4e1f-a887-32876f3fe1cc', // paste your Web3Forms access key here — the contact form sends to your inbox once it's set
-  photo: 'image.png', // your photo in the public folder — set to '' to show initials instead
+  photo: 'profile.jpg', // your photo in the public folder — set to '' to show initials instead
   stack: ['React.js', 'JavaScript', 'Tailwind CSS', 'Node.js', 'MongoDB'],
 }
 
